@@ -1,0 +1,20 @@
+:root {
+    /* Variáveis de fontes */
+    --font-primary: 'Hedvig Letters Sans', sans-serif;
+    --font-secondary: 'Nunito', sans-serif ;
+
+    /* Variáveis de cores*/
+    --color-text: #686868;
+    --color-title: #498DAE;
+    --color-primary: #61A9CC;
+    --color-secondary: #FFFFFF;
+}
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-primary);
+}
