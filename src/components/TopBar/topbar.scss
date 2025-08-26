@@ -1,0 +1,19 @@
+.topbar {
+    &__content {
+        background-color: var(--color-primary);
+        padding: 16px 8px;
+        width: 100%;
+        text-align: center;
+        color: var(--color-secondary);
+    }
+    &__title {
+        font-size: 16px;
+        font-family: var(--font-secondary);
+        font-weight: 500;
+        text-transform: uppercase;
+
+        @media(max-width: 768px) {
+            display: none;
+        }
+    }
+}
