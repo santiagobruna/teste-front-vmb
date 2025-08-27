@@ -1,0 +1,35 @@
+.benefits-container-option {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    text-align: left;
+    gap: 1rem; 
+    padding: 1rem;
+    max-width: 500px;
+    flex-wrap: wrap;
+    margin: 52px 0 72px 0;
+
+    &__icon {
+        flex-shrink: 0;
+
+        img {
+            display: block;
+            width: 40px;
+        }
+    }
+
+    &__text {
+        display: flex;
+        flex-direction: column;
+    }
+
+    &__title {
+        font-weight: bold;
+        margin-bottom: 0.25rem;
+    }
+
+    &__description {
+        font-size: 0.9rem;
+        color: #666;
+    }
+}
