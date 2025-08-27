@@ -1,0 +1,40 @@
+h2 {
+    font-weight: 400;
+    padding-left: 4rem;
+    color: var(--color-title);
+}
+.embla {
+    overflow: hidden;
+    padding-left: 1rem;
+}
+
+.embla__container {
+    display: flex;
+    gap: 1rem;
+}
+
+.embla__slide {
+    flex: 0 0 266px;
+}
+
+.embla__dots {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+}
+
+.embla__dot {
+    width: 10px;
+    height: 10px;
+    background-color: #ccc;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.embla__dot.is-selected {
+    background-color: var(--color-primary);
+}
