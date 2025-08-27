@@ -34,7 +34,7 @@ const Card: React.FC<CardProps> = ({ title, product }) => {
 
     return (
         <div className="carousel-wrapper">
-        <h2>{title}</h2>
+        <h2 className='title'>{title}</h2>
 
         {isMobile ? (
             <>
