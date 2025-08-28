@@ -7,6 +7,7 @@ import { fetchProducts } from './services/api';
 import type { Product } from './containers/CardContainer';
 import SectionInstitutional from './components/SectionInstitutional';
 import Newsletter from './components/Newsletter';
+import Footer from './components/Footer';
 
 function App() {
   const [products, setProducts] = useState<Product[]>([]);
@@ -31,6 +32,7 @@ function App() {
         <Card title="Coleção Camadas" product={products.slice(8, 12)} />
       )}
       <Newsletter/>
+      <Footer/>
     </>
   )
 }
