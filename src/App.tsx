@@ -26,6 +26,9 @@ function App() {
         </>
       )}
       <SectionInstitutional/>
+      {products.length > 8 && (
+        <Card title="Coleção Camadas" product={products.slice(8, 12)} />
+      )}
     </>
   )
 }
