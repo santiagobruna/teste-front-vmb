@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./navbar.scss";
 
 import logo from "../../assets/logo-neoclassico.png";
@@ -11,11 +11,34 @@ import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 
 const NavBar = () => {
     const [menuOpen, setMenuOpen] = useState(false);
+    const [cartOpen, setCartOpen] = useState(false); 
+    const [cart, setCart] = useState<any[]>([]);
+    const [cartCount, setCartCount] = useState(0);
+    
+    const toggleMenu = () => setMenuOpen(!menuOpen);
+    const toggleCart = () => setCartOpen(!cartOpen);
 
-    const toggleMenu = () => {
-        setMenuOpen(!menuOpen);
+    useEffect(() => {
+        const updateCartCount = () => {
+            const cartData = JSON.parse(localStorage.getItem("cart") || "[]");
+            setCart(cartData);
+            setCartCount(cartData.length);
+        };
+        updateCartCount();
+
+        window.addEventListener("cartUpdated", updateCartCount);
+
+        return () => {
+            window.removeEventListener("cartUpdated", updateCartCount);
+        };
+    }, []);
+    const handleRemoveItem = (id: number) => {
+        const updatedCart = cart.filter(item => item.id !== id);
+        setCart(updatedCart);
+        setCartCount(updatedCart.length);
+        localStorage.setItem("cart", JSON.stringify(updatedCart));
+        window.dispatchEvent(new Event("cartUpdated"));
     };
-
     return (
         <nav className="navbar">
             <div className="navbar__container">
@@ -47,14 +70,26 @@ const NavBar = () => {
                     <SearchIcon className="navbar__icon" sx={{ fontSize: 37, color: '#61A9CC', cursor: 'pointer' }}/>
                     <FavoriteBorderIcon className="navbar__icon" sx={{ fontSize: 37, color: '#61A9CC', cursor: 'pointer' }}/>
                     <PersonOutlineIcon className="navbar__icon" sx={{ fontSize: 37, color: '#61A9CC', cursor: 'pointer' }}/>
-                    <ShoppingCartOutlinedIcon className="navbar__icon" sx={{ fontSize: 37, color: '#61A9CC', cursor: 'pointer' }}/>
+                    <div className="navbar__cart" onClick={toggleCart}>
+                        <ShoppingCartOutlinedIcon 
+                            className="navbar__icon" 
+                            sx={{ fontSize: 37, color: '#61A9CC', cursor: 'pointer' }}
+                        />
+                        {cartCount > 0 && <span className="cart-badge">{cartCount}</span>}
+                    </div>
                 </div>
 
                 {/* Mobile: Ícones direita */}
                 <div className="navbar__mobile-right mobile-only">
                     <FavoriteBorderIcon className="navbar__icon" sx={{ fontSize: 22, color: '#61A9CC', cursor: 'pointer' }} />
                     <PersonOutlineIcon className="navbar__icon" sx={{ fontSize: 22, color: '#61A9CC', cursor: 'pointer' }} />
-                    <ShoppingCartOutlinedIcon className="navbar__icon" sx={{ fontSize: 22, color: '#61A9CC', cursor: 'pointer' }}/>
+                    <div className="navbar__cart navbar__cart-mobile" onClick={toggleCart}>
+                        <ShoppingCartOutlinedIcon 
+                            className="navbar__icon" 
+                            sx={{ fontSize: 22, color: '#61A9CC', cursor: 'pointer' }}
+                        />
+                        {cartCount > 0 && <span className="cart-badge">{cartCount}</span>}
+                    </div>
                 </div>
             </div>
 
@@ -69,6 +104,38 @@ const NavBar = () => {
                 <li className="navbar__item"><a href="#">Coleções</a></li>
                 <li className="navbar__item"><a href="#">Rastreio de Pedidos</a></li>
             </ul>
+
+            {/* Modal do carrinho */}
+            {cartOpen && (
+                <div className="cart-modal">
+                    <div className="cart-header">
+                        <h3>Meu Carrinho</h3>
+                        <button className="cart-close" onClick={toggleCart}>×</button>
+                    </div>
+                    {cart.length === 0 ? (
+                        <p className="empty-cart">Seu carrinho está vazio.</p>
+                    ) : (
+                        <ul className="cart-items">
+                            {cart.map((item, index) => (
+                                <li key={index} className="cart-item">
+                                    <img src={item.image} alt={item.title} />
+                                    <div className="cart-item-info">
+                                        <span className="cart-item-title">{item.title}</span>
+                                        <span className="cart-item-price">R$ {item.price.toFixed(2)}</span>
+                                    </div>
+                                    <button 
+                                        className="cart-item-remove" 
+                                        onClick={() => handleRemoveItem(item.id)}
+                                    >
+                                    🗑️
+                                    </button>
+                                </li>
+                            ))}
+                        </ul>
+                    )}
+                    {cart.length > 0 && <button className="cart-checkout">Finalizar Compra</button>}
+                </div>
+            )}
         </nav>
     );
 };

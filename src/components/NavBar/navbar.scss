@@ -100,3 +100,129 @@
         display: none !important;
     }
 }
+
+.navbar__cart {
+    position: relative;
+
+    .cart-badge {
+        position: absolute;
+        top: -5px;
+        right: -5px;
+        background: #61A9CC;
+        color: white;
+        font-size: 12px;
+        font-weight: bold;
+        padding: 2px 6px;
+        border-radius: 50%;
+    }
+}  
+
+.cart-modal {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 320px;
+    height: 100vh;
+    background-color: #fff;
+    box-shadow: -4px 0 12px rgba(0,0,0,0.15);
+    padding: 20px;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    animation: slideIn 0.3s ease-out;
+
+    .cart-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+
+        h3 {
+            margin: 0;
+            font-size: 1.2rem;
+            color: #333;
+        }
+
+        .cart-close {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+    }
+
+    .empty-cart {
+        text-align: center;
+        margin-top: 50px;
+        color: #777;
+    }
+
+    .cart-items {
+        flex: 1;
+        overflow-y: auto;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+
+        .cart-item {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+
+            img {
+                width: 60px;
+                height: 60px;
+                object-fit: cover;
+            }
+            button {
+                background-color: transparent;
+                border: none;
+                padding: 0 10px;
+                height: 40px;
+                cursor: pointer;
+            }
+            .cart-item-info {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+
+                .cart-item-title {
+                    font-weight: 500;
+                    color: #333;
+                }
+
+                .cart-item-price {
+                    color: #61A9CC;
+                    font-weight: bold;
+                }
+            }
+        }
+    }
+
+.cart-checkout {
+    background-color: #61A9CC;
+    color: #fff;
+    border: none;
+    padding: 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    margin-top: 10px;
+    transition: background-color 0.2s;
+
+        &:hover {
+            background-color: #4a8ca0;
+        }
+    }
+
+    @keyframes slideIn {
+        from {
+            transform: translateX(100%);
+        }
+        to {
+            transform: translateX(0);
+        }
+    }
+}
