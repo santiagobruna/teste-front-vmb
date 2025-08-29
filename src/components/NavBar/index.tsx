@@ -14,7 +14,9 @@ const NavBar = () => {
     const [cartOpen, setCartOpen] = useState(false); 
     const [cart, setCart] = useState<any[]>([]);
     const [cartCount, setCartCount] = useState(0);
-    
+    const [purchaseSuccess, setPurchaseSuccess] = useState(false);
+    const [favoritesCount, setFavoritesCount] = useState(0);
+
     const toggleMenu = () => setMenuOpen(!menuOpen);
     const toggleCart = () => setCartOpen(!cartOpen);
 
@@ -32,12 +34,39 @@ const NavBar = () => {
             window.removeEventListener("cartUpdated", updateCartCount);
         };
     }, []);
+
+    useEffect(() => {
+        const updateFavoritesCount = () => {
+            const favorites = JSON.parse(localStorage.getItem("favorites") || "[]");
+            setFavoritesCount(favorites.length);
+        };
+
+        updateFavoritesCount();
+        window.addEventListener("favoritesUpdated", updateFavoritesCount);
+
+        return () => {
+            window.removeEventListener("favoritesUpdated", updateFavoritesCount);
+        };
+    }, []);
+
     const handleRemoveItem = (id: number) => {
         const updatedCart = cart.filter(item => item.id !== id);
         setCart(updatedCart);
         setCartCount(updatedCart.length);
         localStorage.setItem("cart", JSON.stringify(updatedCart));
         window.dispatchEvent(new Event("cartUpdated"));
+    };
+    
+
+    const handleCheckout = () => {
+        if (cart.length > 0) {
+            // Limpa o carrinho
+            localStorage.removeItem("cart");
+            setCart([]);
+            setCartCount(0);
+            setCartOpen(false);
+            setPurchaseSuccess(true);
+        }
     };
     return (
         <nav className="navbar">
@@ -68,7 +97,10 @@ const NavBar = () => {
                 {/* Desktop: Todos os ícones */}
                 <div className="navbar__icons desktop-only">
                     <SearchIcon className="navbar__icon" sx={{ fontSize: 37, color: '#61A9CC', cursor: 'pointer' }}/>
-                    <FavoriteBorderIcon className="navbar__icon" sx={{ fontSize: 37, color: '#61A9CC', cursor: 'pointer' }}/>
+                    <div className="navbar__cart" onClick={() => alert("Seus favoritos")}>
+                        <FavoriteBorderIcon className="navbar__icon" sx={{ fontSize: 37, color: '#61A9CC', cursor: 'pointer' }} />
+                        {favoritesCount > 0 && <span className="cart-badge">{favoritesCount}</span>}
+                    </div>
                     <PersonOutlineIcon className="navbar__icon" sx={{ fontSize: 37, color: '#61A9CC', cursor: 'pointer' }}/>
                     <div className="navbar__cart" onClick={toggleCart}>
                         <ShoppingCartOutlinedIcon 
@@ -81,7 +113,10 @@ const NavBar = () => {
 
                 {/* Mobile: Ícones direita */}
                 <div className="navbar__mobile-right mobile-only">
-                    <FavoriteBorderIcon className="navbar__icon" sx={{ fontSize: 22, color: '#61A9CC', cursor: 'pointer' }} />
+                    <div className="navbar__cart" onClick={() => alert("Seus favoritos")}>
+                        <FavoriteBorderIcon className="navbar__icon" sx={{ fontSize: 22, color: '#61A9CC', cursor: 'pointer' }} />
+                        {favoritesCount > 0 && <span className="cart-badge">{favoritesCount}</span>}
+                    </div>
                     <PersonOutlineIcon className="navbar__icon" sx={{ fontSize: 22, color: '#61A9CC', cursor: 'pointer' }} />
                     <div className="navbar__cart navbar__cart-mobile" onClick={toggleCart}>
                         <ShoppingCartOutlinedIcon 
@@ -133,8 +168,21 @@ const NavBar = () => {
                             ))}
                         </ul>
                     )}
-                    {cart.length > 0 && <button className="cart-checkout">Finalizar Compra</button>}
+                    {cart.length > 0 && (
+                        <button className="cart-checkout" onClick={handleCheckout}>
+                            Finalizar Compra
+                        </button>
+                    )}
                 </div>
+            )}
+            {/* Modal de sucesso */}
+                {purchaseSuccess && (
+                    <div className="success-modal">
+                        <div className="success-content">
+                            <h3>Compra efetuada com sucesso! ✅</h3>
+                            <button onClick={() => setPurchaseSuccess(false)}>Fechar</button>
+                        </div>
+                    </div>
             )}
         </nav>
     );

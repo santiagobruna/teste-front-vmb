@@ -3,6 +3,7 @@
     grid-template-columns: repeat(auto-fill, minmax(266px, 1fr));
     gap: 1.5rem;
     padding: 2rem;
+    
 }
 .card {
     background: rgb(230, 230, 230);
@@ -17,6 +18,28 @@
     min-height: 400px;
     cursor: pointer;
     color: var(--color-text);
+    position: relative;
+    .favorite-button {
+        position: absolute;
+        top: 8px;
+        right: 8px;
+        border: none;
+        border-radius: 50%;
+        padding: 4px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: background 0.2s;
+
+        &:hover {
+            background: rgba(255,255,255,1);
+        }
+
+        svg {
+            font-size: 22px;
+        }
+    }
     &:hover {
         transform: translateY(-4px);
     }
@@ -54,3 +77,4 @@
         }
     }
 }
+
