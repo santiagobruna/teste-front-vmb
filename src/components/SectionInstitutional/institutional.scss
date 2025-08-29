@@ -3,7 +3,6 @@
     display: flex;
     padding-left: 4rem;
     gap: 2rem; 
-    max-width: 1404px;
     @media (max-width: 1024px) { 
         flex-direction: column;
         padding: 0 20px;
@@ -32,7 +31,7 @@
     }
 
     .institutional-content {
-        max-width: 660px;
+        max-width: 560px;
         text-align: justify;
         @media (max-width: 1024px) {
             flex-direction: column;
@@ -40,6 +39,9 @@
             margin-left: auto;
             margin-right: auto; 
             width: 100%;
+        }
+        @media (min-width: 1025px) and (max-width: 1280px) {
+            width: 40%;
         }
         h2 {
         font-weight: 400;
