@@ -33,40 +33,40 @@ const Card: React.FC<CardProps> = ({ title, product }) => {
     const scrollTo = (index: number) => emblaApi && emblaApi.scrollTo(index);
 
     return (
-        <div className="carousel-wrapper">
-        <h2 className='title'>{title}</h2>
+            <div className="carousel-wrapper">
+                <h2 className='title'>{title}</h2>
 
-        {isMobile ? (
-            <>
-                <div className="embla" ref={emblaRef}>
-                    <div className="embla__container">
-                    {product.map((p) => (
-                        <div className="embla__slide" key={p.id}>
-                            <CardContainer product={p} />
+                {isMobile ? (
+                    <>
+                        <div className="embla" ref={emblaRef}>
+                            <div className="embla__container">
+                            {product.map((p) => (
+                                <div className="embla__slide" key={p.id}>
+                                    <CardContainer product={p} />
+                                </div>
+                            ))}
+                            </div>
                         </div>
+
+                        {/* Dots */}
+                        <div className="embla__dots">
+                            {scrollSnaps.map((_, index) => (
+                            <button
+                                key={index}
+                                className={`embla__dot ${index === selectedIndex ? 'is-selected' : ''}`}
+                                onClick={() => scrollTo(index)}
+                            />
+                            ))}
+                        </div>
+                    </>
+                ) : (
+                    <div className="card-container">
+                    {product.map((p) => (
+                        <CardContainer key={p.id} product={p} />
                     ))}
                     </div>
-                </div>
-
-                {/* Dots */}
-                <div className="embla__dots">
-                    {scrollSnaps.map((_, index) => (
-                    <button
-                        key={index}
-                        className={`embla__dot ${index === selectedIndex ? 'is-selected' : ''}`}
-                        onClick={() => scrollTo(index)}
-                    />
-                    ))}
-                </div>
-            </>
-        ) : (
-            <div className="card-container">
-            {product.map((p) => (
-                <CardContainer key={p.id} product={p} />
-            ))}
+                )}
             </div>
-        )}
-        </div>
     );
 };
 

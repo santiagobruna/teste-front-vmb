@@ -2,4 +2,11 @@
     display: flex;
     gap: 26px;
     justify-content: space-around;
+    font-family: var(--font-secondary);
+    color: var(--color-text);
+    @media(max-width: 768px){
+        flex-direction: column;
+        justify-content: center;
+        gap: 0;
+    }
 }

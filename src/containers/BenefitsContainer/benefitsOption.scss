@@ -6,9 +6,10 @@
     gap: 1rem; 
     padding: 1rem;
     max-width: 500px;
-    flex-wrap: wrap;
     margin: 52px 0 72px 0;
-
+    @media(max-width: 768px){
+        margin: 10px 0 ;
+    }
     &__icon {
         flex-shrink: 0;
 
