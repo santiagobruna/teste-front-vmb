@@ -33,7 +33,7 @@ const Card: React.FC<CardProps> = ({ title, product }) => {
     const scrollTo = (index: number) => emblaApi && emblaApi.scrollTo(index);
 
     return (
-            <div className="carousel-wrapper">
+            <div className="carousel-wrapper" id='products'>
                 <h2 className='title'>{title}</h2>
 
                 {isMobile ? (
