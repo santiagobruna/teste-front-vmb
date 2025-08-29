@@ -27,7 +27,7 @@ const Card: React.FC<CardProps> = ({ title, product }) => {
 
         setScrollSnaps(emblaApi.scrollSnapList());
         emblaApi.on('select', onSelect);
-        onSelect(); // inicializa
+        onSelect(); 
     }, [emblaApi, onSelect]);
 
     const scrollTo = (index: number) => emblaApi && emblaApi.scrollTo(index);
