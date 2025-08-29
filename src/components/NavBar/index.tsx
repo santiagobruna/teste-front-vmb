@@ -16,7 +16,7 @@ const NavBar = () => {
     const [cartCount, setCartCount] = useState(0);
     const [purchaseSuccess, setPurchaseSuccess] = useState(false);
     const [favoritesCount, setFavoritesCount] = useState(0);
-
+    
     const toggleMenu = () => setMenuOpen(!menuOpen);
     const toggleCart = () => setCartOpen(!cartOpen);
 
@@ -60,7 +60,6 @@ const NavBar = () => {
 
     const handleCheckout = () => {
         if (cart.length > 0) {
-            // Limpa o carrinho
             localStorage.removeItem("cart");
             setCart([]);
             setCartCount(0);
