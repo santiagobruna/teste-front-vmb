@@ -17,7 +17,7 @@ Aplicação frontend desenvolvida em React + TypeScript como desafio. O projeto 
 - [x] Hover effects nos cards.  
 - [ ] Header fixo no scroll.  
 - [x] Versão mobile first responsiva. 
-- [ ] Simulação de carrinho com localStorage.
+- [x] Simulação de carrinho com localStorage.
 
 ### Tecnologias utilizadas:
 - React.
