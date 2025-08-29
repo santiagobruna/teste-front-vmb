@@ -1,69 +1,59 @@
-# React + TypeScript + Vite
+#  Neoclássico Store – Frontend E-commerce
+Aplicação frontend desenvolvida em React + TypeScript como desafio. O projeto simula um e-commerce, com exibição de produtos, seções institucionais e footer responsivo. A estrutura foi organizada em componentes reutilizáveis, SCSS modularizado e integração com API mockada para simulação de listagem de produtos.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## 📌 Funcionalidades
 
-Currently, two official plugins are available:
+### Requisitos obrigatórios
+- [x] Header com logo, menu e ícones (busca, login e carrinho).  
+- [x] Banner principal (imagem + chamada).
+- [x] Seção de benefícios (3 colunas com ícones e textos).  
+- [x] Seções de produtos ("Novidades" e "Mais Vendidos") consumindo API.  
+- [x] Seção institucional com texto e CTA.  
+- [x] Seção coleção com produtos.  
+- [x] Footer com newsletter, contatos, redes sociais e pagamentos. 
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### Desafios opcionais implementados
+- [x] Carrossel de produtos.  
+- [x] Hover effects nos cards.  
+- [ ] Header fixo no scroll.  
+- [x] Versão mobile first responsiva. 
+- [ ] Simulação de carrinho com localStorage.
 
-## Expanding the ESLint configuration
+### Tecnologias utilizadas:
+- React.
+- TypeScript.
+- API Fake.
+- Sass.
+- Embla Carousel.
+- Material Icons.
+  
+## 📸 Demonstração
+<img width="1897" height="876" alt="neoclassico" src="https://github.com/user-attachments/assets/a812db2e-244a-4df9-bc9a-5ba2667fda4c" />
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## 📦 Como Rodar o Projeto:
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+1. Clone o repositório:
+``` 
+git clone https://github.com/santiagobruna/teste-front-vmb.git
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+````
+2. Acesse a pasta do projeto:
+``` 
+cd teste-front-vmb
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+````
+3. Instale as dependências:
+``` 
+npm install
+# ou
+yarn install
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+````
+4. Execute o projeto:
+``` 
+npm run dev
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+````
+## Acesse o projeto
+Clicando aqui: https://teste-front-vmb.vercel.app/
